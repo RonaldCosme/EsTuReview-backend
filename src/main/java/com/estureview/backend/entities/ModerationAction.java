@@ -1,8 +1,14 @@
 package com.estureview.backend.entities;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 import java.util.Date;
-
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "ModerationAction")
 public class ModerationAction {
@@ -10,7 +16,7 @@ public class ModerationAction {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "action_id")
-    private Integer actionId;
+    private Long actionId;
 
     @ManyToOne
     @JoinColumn(name = "review_id")
@@ -29,5 +35,4 @@ public class ModerationAction {
     @Column(name = "comment")
     private String comment;
 
-    // Getters, Setters, Constructors, equals(), hashCode(), toString()
 }

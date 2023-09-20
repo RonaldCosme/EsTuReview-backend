@@ -1,8 +1,14 @@
 package com.estureview.backend.entities;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 import java.util.Date;
-
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "ReviewComment")
 public class ReviewComment {
@@ -10,7 +16,7 @@ public class ReviewComment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "comment_id")
-    private Integer commentId;
+    private Long commentId;
 
     @ManyToOne
     @JoinColumn(name = "review_id")
@@ -26,5 +32,4 @@ public class ReviewComment {
     @Column(name = "comment_date", nullable = false)
     private Date commentDate;
 
-    // Getters, Setters, Constructors, equals(), hashCode(), toString()
 }

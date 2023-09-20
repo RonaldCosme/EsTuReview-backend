@@ -1,10 +1,16 @@
 package com.estureview.backend.entities;
 
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
-
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "Professor")
 public class Professor {
@@ -12,7 +18,7 @@ public class Professor {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "professor_id")
-    private Integer professorId;
+    private Long professorId;
 
     @OneToOne
     @JoinColumn(name = "user_id")
@@ -27,5 +33,5 @@ public class Professor {
     @OneToMany(mappedBy = "professor")
     private List<Review> reviews;
 
-    // Getters, Setters, Constructors, equals(), hashCode(), toString()
+
 }

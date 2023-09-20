@@ -1,15 +1,14 @@
 package com.estureview.backend.services;
 
 
-import com.estureview.backend.dtos.UniversityDTO;
+import com.estureview.backend.entities.University;
 
 import java.util.List;
 
 public interface UniversityService {
-
-    UniversityDTO createUniversity(UniversityDTO universityDTO);
-    List<UniversityDTO> listAllUniversities();
-    UniversityDTO findUniversityByIdOrName(Long id, String name);
+    University createUniversity(University university);
+    List<University> listAllUniversities();
+    University findUniversityByIdOrName(Long id, String name);
     void deleteUniversity(Long id);
-    UniversityDTO updateUniversity(UniversityDTO universityDTO);
+    University updateUniversity(University university);
 }

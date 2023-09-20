@@ -1,8 +1,14 @@
 package com.estureview.backend.entities;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 import java.util.List;
-
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "University")
 public class University {
@@ -10,7 +16,7 @@ public class University {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "university_id")
-    private Integer universityId;
+    private Long universityId;
 
     @Column(name = "name", nullable = false)
     private String name;
@@ -30,7 +36,6 @@ public class University {
     @OneToMany(mappedBy = "university")
     private List<Course> courses;
 
-    // Getters, Setters, Constructors, equals(), hashCode(), toString()
 }
 
 

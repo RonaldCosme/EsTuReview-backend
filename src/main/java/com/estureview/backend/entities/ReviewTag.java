@@ -1,7 +1,13 @@
 package com.estureview.backend.entities;
 
-import javax.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+import javax.persistence.*;
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "ReviewTag")
 public class ReviewTag {
@@ -9,7 +15,7 @@ public class ReviewTag {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "review_tag_id")
-    private Integer reviewTagId;
+    private Long reviewTagId;
 
     @ManyToOne
     @JoinColumn(name = "review_id")
@@ -19,5 +25,4 @@ public class ReviewTag {
     @JoinColumn(name = "tag_id")
     private Tag tag;
 
-    // Getters, Setters, Constructors, equals(), hashCode(), toString()
 }

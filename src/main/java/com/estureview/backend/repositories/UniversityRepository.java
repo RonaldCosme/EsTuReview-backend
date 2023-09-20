@@ -8,5 +8,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface UniversityRepository extends JpaRepository<University, Long> {
-
+    // Método para buscar una universidad por su nombre
+    University findByName(String name);
 }
