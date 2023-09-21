@@ -25,14 +25,17 @@ public class ModerationActionServiceImpl implements ModerationActionService {
     @Override
     public ModerationActionDTO getModerationActionById(Long id) {
         return moderationActionRepository.findById(id)
-                .map(ModerationActionDTO::new)
+                .map(ModerationActionDTO:: new)
                 .orElse(null);
     }
 
     @Override
     public ModerationActionDTO createModerationAction(ModerationActionDTO moderationActionDTO) {
         ModerationAction moderationAction = new ModerationAction();
-        // TODO: Map moderationAction properties from moderationActionDTO here...
+        moderationAction.setAction_id(moderationActionDTO.getAction_id());
+        moderationAction.setAction_type(moderationActionDTO.getAction_type());
+        moderationAction.setAction_date(moderationActionDTO.getAction_date());
+        moderationAction.setComment(moderationActionDTO.getComment());
         moderationAction = moderationActionRepository.save(moderationAction);
         return new ModerationActionDTO(moderationAction);
     }
@@ -41,7 +44,11 @@ public class ModerationActionServiceImpl implements ModerationActionService {
     public ModerationActionDTO updateModerationAction(Long id, ModerationActionDTO moderationActionDTO) {
         ModerationAction moderationAction = moderationActionRepository.findById(id).orElse(null);
         if (moderationAction != null) {
-            // TODO: Update moderationAction properties from moderationActionDTO here...
+            moderationAction.setAction_id(moderationActionDTO.getAction_id());
+            moderationAction.setAction_type(moderationActionDTO.getAction_type());
+            moderationAction.setAction_date(moderationActionDTO.getAction_date());
+            moderationAction.setComment(moderationActionDTO.getComment());
+
             moderationAction = moderationActionRepository.save(moderationAction);
         }
         return new ModerationActionDTO(moderationAction);

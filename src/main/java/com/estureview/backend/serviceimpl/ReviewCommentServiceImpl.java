@@ -33,7 +33,10 @@ public class ReviewCommentServiceImpl implements ReviewCommentService {
     @Override
     public ReviewCommentDTO createReviewComment(ReviewCommentDTO reviewCommentDTO) {
         ReviewComment reviewComment = new ReviewComment();
-        // TODO: Map reviewComment properties from reviewCommentDTO here...
+        reviewComment.setComment_id(reviewCommentDTO.getComment_id());
+        reviewComment.setText(reviewCommentDTO.getText());
+        reviewComment.setTag(reviewCommentDTO.getTag());
+        reviewComment.setComment_date(reviewCommentDTO.getComment_date());
         reviewComment = reviewCommentRepository.save(reviewComment);
         return new ReviewCommentDTO(reviewComment);
     }
@@ -42,7 +45,10 @@ public class ReviewCommentServiceImpl implements ReviewCommentService {
     public ReviewCommentDTO updateReviewComment(Long id, ReviewCommentDTO reviewCommentDTO) {
         ReviewComment reviewComment = reviewCommentRepository.findById(id).orElse(null);
         if (reviewComment != null) {
-            // TODO: Update reviewComment properties from reviewCommentDTO here...
+            reviewComment.setComment_id(reviewCommentDTO.getComment_id());
+            reviewComment.setText(reviewCommentDTO.getText());
+            reviewComment.setTag(reviewCommentDTO.getTag());
+            reviewComment.setComment_date(reviewCommentDTO.getComment_date());
             reviewComment = reviewCommentRepository.save(reviewComment);
         }
         return new ReviewCommentDTO(reviewComment);

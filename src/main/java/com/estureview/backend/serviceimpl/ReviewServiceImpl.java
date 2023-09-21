@@ -33,7 +33,11 @@ public class ReviewServiceImpl implements ReviewService {
     @Override
     public ReviewDTO createReview(ReviewDTO reviewDTO) {
         Review review = new Review();
-        // TODO: Map review properties from reviewDTO here...
+        review.setReview_id(reviewDTO.getReview_id());
+        review.setComment(reviewDTO.getComment());
+        review.setRating(reviewDTO.getRating());
+        review.setReview_date(reviewDTO.getReview_date());
+        review.setStatus(reviewDTO.getStatus());
         review = reviewRepository.save(review);
         return new ReviewDTO(review);
     }
@@ -42,7 +46,11 @@ public class ReviewServiceImpl implements ReviewService {
     public ReviewDTO updateReview(Long id, ReviewDTO reviewDTO) {
         Review review = reviewRepository.findById(id).orElse(null);
         if (review != null) {
-            // TODO: Update review properties from reviewDTO here...
+            review.setReview_id(reviewDTO.getReview_id());
+            review.setComment(reviewDTO.getComment());
+            review.setRating(reviewDTO.getRating());
+            review.setReview_date(reviewDTO.getReview_date());
+            review.setStatus(reviewDTO.getStatus());
             review = reviewRepository.save(review);
         }
         return new ReviewDTO(review);

@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class CourseServiceImpl implements CourseService {
+public class  CourseServiceImpl implements CourseService {
 
     @Autowired
     private CourseRepository courseRepository;
@@ -32,6 +32,7 @@ public class CourseServiceImpl implements CourseService {
     @Override
     public CourseDTO createCourse(CourseDTO courseDTO) {
         Course course = new Course();
+
         // Set course properties from courseDTO...
         course = courseRepository.save(course);
         return new CourseDTO(course);

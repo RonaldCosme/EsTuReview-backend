@@ -34,7 +34,11 @@ public class UniversityServiceImpl implements UniversityService {
     @Override
     public UniversityDTO createUniversity(UniversityDTO universityDTO) {
         University university = new University();
-        // TODO: Map university properties from universityDTO here...
+       university.setUniversity_id(university.getUniversity_id());
+       university.setName(university.getName());
+       university.setCampus(university.getCampus());
+       university.setLocation(university.getLocation());
+       university.setDescription(university.getDescription());
         university = universityRepository.save(university);
         return new UniversityDTO(university);
     }
@@ -43,7 +47,11 @@ public class UniversityServiceImpl implements UniversityService {
     public UniversityDTO updateUniversity(Long id, UniversityDTO universityDTO) {
         University university = universityRepository.findById(id).orElse(null);
         if (university != null) {
-            // TODO: Update university properties from universityDTO here...
+            university.setUniversity_id(universityDTO.getUniversity_id());
+            university.setName(universityDTO.getName());
+            university.setCampus(universityDTO.getCampus());
+            university.setLocation(universityDTO.getLocation());
+            university.setDescription(universityDTO.getDescription());
             university = universityRepository.save(university);
         }
         return new UniversityDTO(university);

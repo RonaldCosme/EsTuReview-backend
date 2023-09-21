@@ -25,5 +25,8 @@ public class Course {
 
     private String description;
 
+    public Course(String introToTech, String tech101, Object o, String s) {
+    }
+
     // getters, setters, constructors...
 }

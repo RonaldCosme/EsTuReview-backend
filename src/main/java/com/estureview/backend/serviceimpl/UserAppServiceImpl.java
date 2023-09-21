@@ -28,14 +28,18 @@ public class UserAppServiceImpl implements UserAppService {
     public UserAppDTO getUserById(Long id) {
         return userAppRepository.findById(id)
                 .map(UserAppDTO::new)
-                .orElse(null);  // Considera lanzar una excepción si el usuario no es encontrado
+                .orElse(null);
+        // Considera lanzar una excepción si el usuario no es encontrado
     }
 
     @Override
     public UserAppDTO createUser(UserAppDTO userDTO) {
         UserApp userApp = new UserApp();
+        userApp.setUserapp_id(userDTO.getUserapp_id());
         userApp.setName(userDTO.getName());
         userApp.setEmail(userDTO.getEmail());
+        userApp.setRole(userDTO.getRole());
+        userApp.setRegistration_date(userDTO.getRegistration_date());
         // ... establece los demás campos ...
 
         UserApp savedUserApp = userAppRepository.save(userApp);
@@ -50,6 +54,8 @@ public class UserAppServiceImpl implements UserAppService {
         if (existingUserApp != null) {
             existingUserApp.setName(userDTO.getName());
             existingUserApp.setEmail(userDTO.getEmail());
+            existingUserApp.setRole(userDTO.getRole());
+            existingUserApp.setRegistration_date(userDTO.getRegistration_date());
             // ... actualiza los demás campos ...
 
             UserApp updatedUserApp = userAppRepository.save(existingUserApp);

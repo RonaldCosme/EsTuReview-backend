@@ -32,7 +32,10 @@ public class ProfessorServiceImpl implements ProfessorService {
     @Override
     public ProfessorDTO createProfessor(ProfessorDTO professorDTO) {
         Professor professor = new Professor();
-        // TODO: Map professor properties from professorDTO here...
+        professor.setProfessor_id(professorDTO.getProfessor_id());
+        professor.setFaculty(professorDTO.getFaculty());
+        professor.setJoin_date(professorDTO.getJoin_date());
+
         professor = professorRepository.save(professor);
         return new ProfessorDTO(professor);
     }
@@ -41,7 +44,9 @@ public class ProfessorServiceImpl implements ProfessorService {
     public ProfessorDTO updateProfessor(Long id, ProfessorDTO professorDTO) {
         Professor professor = professorRepository.findById(id).orElse(null);
         if (professor != null) {
-            // TODO: Update professor properties from professorDTO here...
+            professor.setProfessor_id(professorDTO.getProfessor_id());
+            professor.setFaculty(professorDTO.getFaculty());
+            professor.setJoin_date(professorDTO.getJoin_date());
             professor = professorRepository.save(professor);
         }
         return new ProfessorDTO(professor);

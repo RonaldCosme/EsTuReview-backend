@@ -27,6 +27,7 @@ public class University {
     @OneToMany(mappedBy = "university")
     private List<Course> courses;
 
+
     // getters, setters, constructors...
 }
 
