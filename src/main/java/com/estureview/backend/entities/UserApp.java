@@ -5,33 +5,28 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.List;
+import java.util.Date;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class University {
+@Table(name = "UserApp")
+public class UserApp {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long university_id;
+    private Long userapp_id;
 
     private String name;
-    private String campus;
-    private String location;
-    private String description;
+    private String email;
+    private String password;
 
-    @OneToMany(mappedBy = "university")
-    private List<UserApp> users;
+    @ManyToOne
+    @JoinColumn(name = "university_id")
+    private University university;
 
-    @OneToMany(mappedBy = "university")
-    private List<Course> courses;
+    private Date registration_date;
+    private String role;
 
     // getters, setters, constructors...
 }
-
-
-
-
-
-

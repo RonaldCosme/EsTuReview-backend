@@ -1,0 +1,58 @@
+package com.estureview.backend.serviceimpl;
+import com.estureview.backend.dtos.ModerationActionDTO;
+import com.estureview.backend.entities.ModerationAction;
+import com.estureview.backend.repositories.ModerationActionRepository;
+import com.estureview.backend.services.ModerationActionService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.stream.Collectors;
+
+@Service
+public class ModerationActionServiceImpl implements ModerationActionService {
+
+    @Autowired
+    private ModerationActionRepository moderationActionRepository;
+
+    @Override
+    public List<ModerationActionDTO> getAllModerationActions() {
+        return moderationActionRepository.findAll().stream()
+                .map(ModerationActionDTO::new)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public ModerationActionDTO getModerationActionById(Long id) {
+        return moderationActionRepository.findById(id)
+                .map(ModerationActionDTO::new)
+                .orElse(null);
+    }
+
+    @Override
+    public ModerationActionDTO createModerationAction(ModerationActionDTO moderationActionDTO) {
+        ModerationAction moderationAction = new ModerationAction();
+        // TODO: Map moderationAction properties from moderationActionDTO here...
+        moderationAction = moderationActionRepository.save(moderationAction);
+        return new ModerationActionDTO(moderationAction);
+    }
+
+    @Override
+    public ModerationActionDTO updateModerationAction(Long id, ModerationActionDTO moderationActionDTO) {
+        ModerationAction moderationAction = moderationActionRepository.findById(id).orElse(null);
+        if (moderationAction != null) {
+            // TODO: Update moderationAction properties from moderationActionDTO here...
+            moderationAction = moderationActionRepository.save(moderationAction);
+        }
+        return new ModerationActionDTO(moderationAction);
+    }
+
+    @Override
+    public void deleteModerationAction(Long id) {
+        moderationActionRepository.deleteById(id);
+    }
+}
+
+
+
+

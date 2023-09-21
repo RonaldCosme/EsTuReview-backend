@@ -1,6 +1,6 @@
 package com.estureview.backend.dtos;
 
-import com.estureview.backend.entities.University;
+import com.estureview.backend.entities.Course;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -8,15 +8,15 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class UniversityDTO {
+public class CourseDTO {
 
+    private Long course_id;
+    private String course_name;
+    private String course_code;
     private Long university_id;
-    private String name;
-    private String campus;
-    private String location;
     private String description;
 
-    public UniversityDTO(University university) {
+    public CourseDTO(Course course) {
     }
 
     // getters, setters, constructors...
