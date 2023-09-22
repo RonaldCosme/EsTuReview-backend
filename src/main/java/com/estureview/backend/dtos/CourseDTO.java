@@ -7,13 +7,13 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class UniversityDTO {
+public class CourseDTO {
 
     private Integer id;
-    private String name;
-    private String campus;
-    private String location;
+    private String courseName;
+    private String courseCode;
     private String description;
+    private Integer universityId;
 
     // Getters y Setters
 }

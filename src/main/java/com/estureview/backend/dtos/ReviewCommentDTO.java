@@ -4,16 +4,18 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Date;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class UniversityDTO {
+public class ReviewCommentDTO {
 
     private Integer id;
-    private String name;
-    private String campus;
-    private String location;
-    private String description;
+    private String text;
+    private String tag;
+    private Date commentDate;
+    private Integer reviewId;
+    private Integer userId;
 
     // Getters y Setters
 }

@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/universities")
+@RequestMapping("/api/universities")
 public class UniversityController {
 
     @Autowired
@@ -17,48 +17,27 @@ public class UniversityController {
 
     @PostMapping
     public ResponseEntity<UniversityDTO> createUniversity(@RequestBody UniversityDTO universityDTO) {
-        UniversityDTO createdUniversity = universityService.createUniversity(universityDTO);
-        return ResponseEntity.ok(createdUniversity);
+        return ResponseEntity.ok(universityService.createUniversity(universityDTO));
     }
 
     @GetMapping
     public ResponseEntity<List<UniversityDTO>> listAllUniversities() {
-        List<UniversityDTO> universities = universityService.listAllUniversities();
-        return ResponseEntity.ok(universities);
+        return ResponseEntity.ok(universityService.listAllUniversities());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<UniversityDTO> getUniversityById(@PathVariable Long id) {
-        UniversityDTO universityDTO = universityService.findUniversityByIdOrName(id, null);
-        if (universityDTO != null) {
-            return ResponseEntity.ok(universityDTO);
-        } else {
-            return ResponseEntity.notFound().build();
-        }
-    }
-
-    @GetMapping("/search")
-    public ResponseEntity<UniversityDTO> getUniversityByName(@RequestParam String name) {
-        UniversityDTO universityDTO = universityService.findUniversityByIdOrName(null, name);
-        if (universityDTO != null) {
-            return ResponseEntity.ok(universityDTO);
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+    public ResponseEntity<UniversityDTO> findUniversityById(@PathVariable Integer id) {
+        return ResponseEntity.ok(universityService.findUniversityById(id));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteUniversity(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteUniversity(@PathVariable Integer id) {
         universityService.deleteUniversity(id);
-        return ResponseEntity.noContent().build();
+        return ResponseEntity.ok().build();
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<UniversityDTO> updateUniversity(@PathVariable Long id, @RequestBody UniversityDTO universityDTO) {
-        if (!id.equals(universityDTO.getUniversityId())) {
-            return ResponseEntity.badRequest().build();
-        }
-        UniversityDTO updatedUniversity = universityService.updateUniversity(universityDTO);
-        return ResponseEntity.ok(updatedUniversity);
+    @PutMapping
+    public ResponseEntity<UniversityDTO> updateUniversity(@RequestBody UniversityDTO universityDTO) {
+        return ResponseEntity.ok(universityService.updateUniversity(universityDTO));
     }
 }

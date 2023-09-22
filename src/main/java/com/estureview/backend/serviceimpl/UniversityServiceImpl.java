@@ -7,7 +7,6 @@ import com.estureview.backend.services.UniversityService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -26,6 +25,7 @@ public class UniversityServiceImpl implements UniversityService {
         BeanUtils.copyProperties(university, universityDTO);
         return universityDTO;
     }
+
     @Override
     public List<UniversityDTO> listAllUniversities() {
         List<University> universities = universityRepository.findAll();
@@ -37,16 +37,10 @@ public class UniversityServiceImpl implements UniversityService {
         }
         return universityDTOs;
     }
+
     @Override
-    public UniversityDTO findUniversityByIdOrName(Long id, String name) {
-        Optional<University> universityOptional;
-        if (id != null) {
-            universityOptional = universityRepository.findById(id);
-        } else {
-            // Aquí deberías agregar un método en el repositorio para buscar por nombre
-            // universityOptional = universityRepository.findByName(name);
-            throw new UnsupportedOperationException("Buscar por nombre aún no está implementado");
-        }
+    public UniversityDTO findUniversityById(Integer id) {
+        Optional<University> universityOptional = universityRepository.findById(id);
         if (universityOptional.isPresent()) {
             UniversityDTO universityDTO = new UniversityDTO();
             BeanUtils.copyProperties(universityOptional.get(), universityDTO);
@@ -54,13 +48,15 @@ public class UniversityServiceImpl implements UniversityService {
         }
         return null;
     }
+
     @Override
-    public void deleteUniversity(Long id) {
+    public void deleteUniversity(Integer id) {
         universityRepository.deleteById(id);
     }
+
     @Override
     public UniversityDTO updateUniversity(UniversityDTO universityDTO) {
-        if (universityDTO.getUniversityId() == null) {
+        if (universityDTO.getId() == null) {
             throw new IllegalArgumentException("El ID de la universidad es necesario para actualizar");
         }
         University university = new University();
