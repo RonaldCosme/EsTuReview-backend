@@ -3,62 +3,40 @@ package com.estureview.backend.controllers;
 import com.estureview.backend.dtos.UniversityDTO;
 import com.estureview.backend.services.UniversityService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/universities")
+@RequestMapping("/api/universities")
 public class UniversityController {
 
     @Autowired
     private UniversityService universityService;
 
-    @PostMapping
-    public ResponseEntity<UniversityDTO> createUniversity(@RequestBody UniversityDTO universityDTO) {
-        UniversityDTO createdUniversity = universityService.createUniversity(universityDTO);
-        return ResponseEntity.ok(createdUniversity);
-    }
-
     @GetMapping
-    public ResponseEntity<List<UniversityDTO>> listAllUniversities() {
-        List<UniversityDTO> universities = universityService.listAllUniversities();
-        return ResponseEntity.ok(universities);
+    public ResponseEntity<List<UniversityDTO>> getAllUniversities() {
+        return new ResponseEntity<>(universityService.findAll(), HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<UniversityDTO> getUniversityById(@PathVariable Long id) {
-        UniversityDTO universityDTO = universityService.findUniversityByIdOrName(id, null);
-        if (universityDTO != null) {
-            return ResponseEntity.ok(universityDTO);
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+    public ResponseEntity<UniversityDTO> getUniversityById(@PathVariable Integer id) {
+        UniversityDTO universityDTO = universityService.findById(id);
+        return universityDTO != null ?
+                new ResponseEntity<>(universityDTO, HttpStatus.OK) :
+                new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
-    @GetMapping("/search")
-    public ResponseEntity<UniversityDTO> getUniversityByName(@RequestParam String name) {
-        UniversityDTO universityDTO = universityService.findUniversityByIdOrName(null, name);
-        if (universityDTO != null) {
-            return ResponseEntity.ok(universityDTO);
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+    @PostMapping
+    public ResponseEntity<UniversityDTO> createUniversity(@RequestBody UniversityDTO universityDTO) {
+        return new ResponseEntity<>(universityService.save(universityDTO), HttpStatus.CREATED);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteUniversity(@PathVariable Long id) {
-        universityService.deleteUniversity(id);
-        return ResponseEntity.noContent().build();
-    }
-
-    @PutMapping("/{id}")
-    public ResponseEntity<UniversityDTO> updateUniversity(@PathVariable Long id, @RequestBody UniversityDTO universityDTO) {
-        if (!id.equals(universityDTO.getUniversityId())) {
-            return ResponseEntity.badRequest().build();
-        }
-        UniversityDTO updatedUniversity = universityService.updateUniversity(universityDTO);
-        return ResponseEntity.ok(updatedUniversity);
+    public ResponseEntity<Void> deleteUniversity(@PathVariable Integer id) {
+        universityService.deleteById(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }
