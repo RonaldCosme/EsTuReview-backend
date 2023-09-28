@@ -37,6 +37,7 @@ public class University {
     @OneToMany(mappedBy = "university")
     private Set<Course> courses;
 
+
     // Getters and Setters
 }
 

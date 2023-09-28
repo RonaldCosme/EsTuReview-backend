@@ -3,6 +3,7 @@ package com.estureview.backend.entities;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
@@ -32,8 +33,10 @@ public class UserApp {
     @Column(name = "registration_date", nullable = false)
     private Date registrationDate;
 
+    @Getter
+    @Enumerated(EnumType.STRING)
     @Column(name = "role", nullable = false)
-    private String role;
+    private Role role;
 
     @ManyToOne
     @JoinColumn(name = "university_id")
@@ -51,6 +54,9 @@ public class UserApp {
     @OneToMany(mappedBy = "admin")
     private Set<ModerationAction> moderationActions;
 
+    public void setRole(Role role) {
+        this.role = role;
+    }
     // Getters and Setters
 }
 

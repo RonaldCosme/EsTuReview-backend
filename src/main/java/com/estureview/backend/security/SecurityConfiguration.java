@@ -12,6 +12,12 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+
+import java.util.Arrays;
+import java.util.Collections;
 
 @Configuration
 @EnableWebSecurity
@@ -41,13 +47,27 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         return super.authenticationManagerBean();
     }
 
+    @Bean
+    CorsConfigurationSource corsConfigurationSource() {
+        CorsConfiguration configuration = new CorsConfiguration();
+        configuration.setAllowedOrigins(Collections.singletonList("*"));
+        configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
+        configuration.setAllowedHeaders(Collections.singletonList("*"));
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", configuration);
+        return source;
+    }
+
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
-        httpSecurity.csrf().disable()
-                .authorizeRequests().antMatchers("/authenticate").permitAll()
+        httpSecurity.cors().and()
+                .csrf().disable()
+                .authorizeRequests()
+                .antMatchers("/swagger-ui.html", "/swagger-ui/**", "/v3/api-docs/**", "/authenticate", "/webjars/**").permitAll()
                 .anyRequest().authenticated()
-                .and().sessionManagement()
-                .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+                .and()
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+
         httpSecurity.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
     }
 }

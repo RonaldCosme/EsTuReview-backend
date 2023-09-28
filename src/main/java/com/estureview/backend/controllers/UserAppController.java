@@ -1,10 +1,15 @@
 package com.estureview.backend.controllers;
 
 import com.estureview.backend.dtos.UserAppDTO;
+import com.estureview.backend.entities.UserApp;
+import com.estureview.backend.repositories.UserAppRepository;
+import com.estureview.backend.serviceimpl.UserAppServiceImpl;
 import com.estureview.backend.services.UserAppService;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -13,8 +18,15 @@ import java.util.List;
 @RequestMapping("/api/userApps")
 public class UserAppController {
 
+
     @Autowired
     private UserAppService userAppService;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
+    @Autowired
+    private ModelMapper modelMapper;
 
     @GetMapping
     public ResponseEntity<List<UserAppDTO>> getAllUserApps() {
@@ -41,4 +53,5 @@ public class UserAppController {
         userAppService.deleteById(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
+
 }

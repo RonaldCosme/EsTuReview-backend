@@ -21,14 +21,26 @@ public class BackendApplication {
 								   ProfessorRepository professorRepository,
 								   UniversityRepository universityRepository,
 								   CourseRepository courseRepository,
-								   ReviewRepository reviewRepository) {
+								   ReviewRepository reviewRepository,
+								   ReviewCommentRepository reviewCommentRepository,
+								   ModerationActionRepository moderationActionRepository) {
 		return args -> {
 			// Crear y guardar algunas entidades de prueba
 
 			// Universidades
 			University university1 = new University();
-			university1.setName("Universidad 1");
+			university1.setName("University 1");
+			university1.setCampus("Campus 1");
+			university1.setLocation("Lugar 1");
+			university1.setDescription("Description uni 1");
 			universityRepository.save(university1);
+
+			University university2 = new University();
+			university2.setName("University 2");
+			university2.setCampus("Campus 2");
+			university2.setLocation("Lugar 2");
+			university2.setDescription("Description uni 2");
+			universityRepository.save(university2);
 
 			// Usuarios
 			UserApp studentUser = new UserApp();
@@ -37,17 +49,29 @@ public class BackendApplication {
 			studentUser.setPassword("password");
 			studentUser.setUniversity(university1);
 			studentUser.setRegistrationDate(new Date());
-			studentUser.setRole("student");
+			studentUser.setRole(Role.ALUMNO);
 			userAppRepository.save(studentUser);
 
 			UserApp professorUser = new UserApp();
 			professorUser.setName("Professor User");
 			professorUser.setEmail("professor@example.com");
 			professorUser.setPassword("password");
-			professorUser.setUniversity(university1);
+			professorUser.setUniversity(university2);
 			professorUser.setRegistrationDate(new Date());
-			professorUser.setRole("professor");
+			professorUser.setRole(Role.PROFESOR);
 			userAppRepository.save(professorUser);
+
+
+			UserApp adminUser = new UserApp();
+			adminUser.setName("admin User");
+			adminUser.setEmail("admin@example.com");
+			adminUser.setPassword("password");
+			adminUser.setUniversity(null);
+			adminUser.setRegistrationDate(new Date());
+			adminUser.setRole(Role.ADMIN);
+			userAppRepository.save(adminUser);
+
+
 
 			// Profesores
 			Professor professor1 = new Professor();
@@ -56,6 +80,13 @@ public class BackendApplication {
 			professor1.setJoinDate(new Date());
 			professorRepository.save(professor1);
 
+			Professor professor2 = new Professor();
+			professor2.setUserApp(professorUser);
+			professor2.setFaculty("Faculty 2");
+			professor2.setJoinDate(new Date());
+			professorRepository.save(professor2);
+
+
 			// Cursos
 			Course course1 = new Course();
 			course1.setCourseName("Course Name 1");
@@ -63,6 +94,13 @@ public class BackendApplication {
 			course1.setUniversity(university1);
 			course1.setDescription("Description 1");
 			courseRepository.save(course1);
+
+			Course course2 = new Course();
+			course2.setCourseName("Course Name 2");
+			course2.setCourseCode("Course Code 2");
+			course2.setUniversity(university2);
+			course2.setDescription("Description 2");
+			courseRepository.save(course2);
 
 			// Reseñas
 			Review review1 = new Review();
@@ -74,7 +112,51 @@ public class BackendApplication {
 			review1.setReviewDate(new Date());
 			review1.setStatus("published");
 			reviewRepository.save(review1);
+
+			Review review2 = new Review();
+			review2.setUserApp(professorUser);
+			review2.setProfessor(professor2);
+			review2.setCourse(course1);
+			review2.setComment("Comment 2");
+			review2.setRating(0);
+			review2.setReviewDate(new Date());
+			review2.setStatus("published");
+			reviewRepository.save(review2);
+
+			//Review coment
+			ReviewComment reviewComment1 = new ReviewComment();
+			reviewComment1.setText("review coment 1");
+			reviewComment1.setTag("tag1");
+			reviewComment1.setCommentDate(new Date());
+			reviewComment1.setReview(review1);
+			reviewComment1.setUserApp(professorUser);
+			reviewCommentRepository.save(reviewComment1);
+
+			ReviewComment reviewComment2 = new ReviewComment();
+			reviewComment2.setText("review coment 2");
+			reviewComment2.setTag("tag2");
+			reviewComment2.setCommentDate(new Date());
+			reviewComment2.setReview(review2);
+			reviewComment2.setUserApp(professorUser);
+			reviewCommentRepository.save(reviewComment2);
+
+			//action
+
+			ModerationAction action1 = new ModerationAction();
+			action1.setActionType("Eliminar");
+			action1.setActionDate(new Date());
+			action1.setComment("comentario 1");
+			action1.setReview(review1);
+			action1.setAdmin(adminUser);
+			moderationActionRepository.save(action1);
+
+			ModerationAction action2 = new ModerationAction();
+			action2.setActionType("Editar");
+			action2.setActionDate(new Date());
+			action2.setComment("comentario 2");
+			action2.setReview(review2);
+			action2.setAdmin(adminUser);
+			moderationActionRepository.save(action2);
 		};
 	}
-
 }
