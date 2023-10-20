@@ -2,6 +2,7 @@ package com.estureview.backend.services;
 
 import com.estureview.backend.dtos.UserAppDTO;
 import java.util.List;
+import java.util.Optional;
 
 public interface UserAppService {
 
@@ -10,4 +11,6 @@ public interface UserAppService {
     UserAppDTO findUserAppById(Integer id);
     void deleteUserApp(Integer id);
     UserAppDTO updateUserApp(UserAppDTO userAppDTO);
+
+
 }

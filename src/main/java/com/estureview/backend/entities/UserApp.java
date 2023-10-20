@@ -6,7 +6,10 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -19,20 +22,20 @@ public class UserApp {
     @Column(name = "userapp_id")
     private Integer id;
 
-    @Column(name = "name", nullable = false)
+    @Column(name = "name")
     private String name;
 
-    @Column(name = "email", nullable = false, unique = true)
+    @Column(name = "email")
     private String email;
 
-    @Column(name = "password", nullable = false)
+    @Column(name = "username")
+    private String username;
+
+    @Column(name = "password")
     private String password;
 
-    @Column(name = "registration_date", nullable = false)
+    @Column(name = "registration_date")
     private Date registrationDate;
-
-    @Column(name = "role", nullable = false)
-    private String role;
 
     @ManyToOne
     @JoinColumn(name = "university_id")
@@ -43,6 +46,12 @@ public class UserApp {
 
     @OneToMany(mappedBy = "user")
     private List<Professor> professors;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "user_roles",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private Set<Role> roles = new HashSet<>();
 
     // Getters y Setters
 }
