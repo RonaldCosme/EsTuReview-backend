@@ -3,6 +3,7 @@ package com.estureview.backend.serviceimpl;
 import com.estureview.backend.dtos.UserAppDTO;
 import com.estureview.backend.entities.UserApp;
 import com.estureview.backend.repositories.UserAppRepository;
+import com.estureview.backend.security.CustomUserDetailsService;
 import com.estureview.backend.services.UserAppService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,9 @@ public class UserAppServiceImpl implements UserAppService {
 
     @Autowired
     private ModelMapper modelMapper;
+
+    @Autowired
+    private CustomUserDetailsService customUserDetailsService;
 
     @Override
     public List<UserAppDTO> findAll() {
@@ -49,6 +53,7 @@ public class UserAppServiceImpl implements UserAppService {
 
     @Override
     public UserDetails loadUserByUsername(String username) {
-        return null;
+
+        return customUserDetailsService.loadUserByUsername(username);
     }
 }

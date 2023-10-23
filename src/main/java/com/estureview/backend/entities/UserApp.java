@@ -27,6 +27,9 @@ public class UserApp {
     @Column(name = "email", nullable = false, unique = true)
     private String email;
 
+    @Column(name = "username", nullable = false, unique = true)
+    private String username;
+
     @Column(name = "password", nullable = false)
     private String password;
 
@@ -57,6 +60,8 @@ public class UserApp {
     public void setRole(Role role) {
         this.role = role;
     }
+
+
     // Getters and Setters
 }
 

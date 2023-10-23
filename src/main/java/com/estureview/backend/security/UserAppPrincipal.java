@@ -29,32 +29,33 @@ public class UserAppPrincipal implements UserDetails {
 
     @Override
     public String getPassword() {
+
         return userApp.getPassword();
     }
 
     @Override
     public String getUsername() {
-        return userApp.getEmail();
+        return userApp.getUsername();
     }
 
     @Override
     public boolean isAccountNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isEnabled() {
-        return false;
+        return true;
     }
 
     // Implementar los métodos restantes según tus necesidades y reglas de negocio

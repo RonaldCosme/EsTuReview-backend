@@ -7,9 +7,7 @@ import java.util.Optional;
 
 public interface UserAppRepository extends JpaRepository<UserApp, Integer> {
 
-    static boolean existsByEmail(String email) {
-        return false;
-    }
 
-    Optional<UserApp> findByEmail(String email);
+    Optional<UserApp> findByUsername(String username);
+
 }
