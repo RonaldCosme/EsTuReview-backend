@@ -79,7 +79,7 @@ public class BackendApplication  implements CommandLineRunner{
 		UserApp professorUser = new UserApp();
 		professorUser.setName("Professor User");
 		professorUser.setEmail("professor@example.com");
-		professorUser.setUsername("professorUser");  // Agregado
+		professorUser.setUsername("professorUser");
 		professorUser.setPassword(passwordEncoder.encode("password"));
 		professorUser.setUniversity(university2);
 		professorUser.setRegistrationDate(new Date());
@@ -89,7 +89,7 @@ public class BackendApplication  implements CommandLineRunner{
 		UserApp adminUser = new UserApp();
 		adminUser.setName("Admin User");
 		adminUser.setEmail("admin@example.com");
-		adminUser.setUsername("adminUser");  // Agregado
+		adminUser.setUsername("adminUser");
 		adminUser.setPassword(passwordEncoder.encode("password"));
 		adminUser.setUniversity(null);
 		adminUser.setRegistrationDate(new Date());
