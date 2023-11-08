@@ -29,6 +29,28 @@ public class ModerationActionController {
                 new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<ModerationActionDTO> updateModerationAction(@RequestBody ModerationActionDTO moderationActionDTO, @PathVariable Integer id) {
+        ModerationActionDTO foundModerationAction = moderationActionService.findById(id);
+        if (moderationActionDTO.getActionType()!=null) {
+            foundModerationAction.setActionType(moderationActionDTO.getActionType());
+        }
+        if (moderationActionDTO.getActionDate()!=null) {
+            foundModerationAction.setActionDate(moderationActionDTO.getActionDate());
+        }
+        if (moderationActionDTO.getComment()!=null) {
+            foundModerationAction.setComment(moderationActionDTO.getComment());
+        }
+        if (moderationActionDTO.getReviewId()!=null) {
+            foundModerationAction.setReviewId(moderationActionDTO.getReviewId());
+        }
+        if (moderationActionDTO.getAdminId()!=null) {
+            foundModerationAction.setAdminId(moderationActionDTO.getAdminId());
+        }
+        ModerationActionDTO newModerationAction = moderationActionService.save(foundModerationAction);
+        return new ResponseEntity<>(newModerationAction, HttpStatus.OK);
+    }
+
     @PostMapping
     public ResponseEntity<ModerationActionDTO> createModerationAction(@RequestBody ModerationActionDTO moderationActionDTO) {
         return new ResponseEntity<>(moderationActionService.save(moderationActionDTO), HttpStatus.CREATED);

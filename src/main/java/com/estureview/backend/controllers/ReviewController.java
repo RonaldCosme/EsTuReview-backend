@@ -29,6 +29,34 @@ public class ReviewController {
                 new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<ReviewDTO> updateReview(@RequestBody ReviewDTO reviewDTO, @PathVariable Integer id) {
+        ReviewDTO foundReview = reviewService.findById(id);
+        if (reviewDTO.getComment()!=null) {
+            foundReview.setComment(reviewDTO.getComment());
+        }
+        if (reviewDTO.getRating()!=null) {
+            foundReview.setRating(reviewDTO.getRating());
+        }
+        if (reviewDTO.getReviewDate()!=null) {
+            foundReview.setReviewDate(reviewDTO.getReviewDate());
+        }
+        if (reviewDTO.getStatus()!=null) {
+            foundReview.setStatus(reviewDTO.getStatus());
+        }
+        if (reviewDTO.getUserappId()!=null) {
+            foundReview.setUserappId(reviewDTO.getUserappId());
+        }
+        if (reviewDTO.getProfessorId()!=null) {
+            foundReview.setProfessorId(reviewDTO.getProfessorId());
+        }
+        if (reviewDTO.getCourseId()!=null) {
+            foundReview.setCourseId(reviewDTO.getCourseId());
+        }
+        ReviewDTO newReview = reviewService.save(foundReview);
+        return new ResponseEntity<>(newReview, HttpStatus.OK);
+    }
+
     @PostMapping
     public ResponseEntity<ReviewDTO> createReview(@RequestBody ReviewDTO reviewDTO) {
         return new ResponseEntity<>(reviewService.save(reviewDTO), HttpStatus.CREATED);

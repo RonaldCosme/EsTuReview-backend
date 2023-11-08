@@ -9,5 +9,7 @@ public interface UniversityService {
     List<UniversityDTO> findAll();
     UniversityDTO findById(Integer id);
     UniversityDTO save(UniversityDTO universityDTO);
+
+    UniversityDTO update(UniversityDTO universityDTO);
     void deleteById(Integer id);
 }

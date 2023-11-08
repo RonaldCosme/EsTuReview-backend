@@ -29,6 +29,22 @@ public class ProfessorController {
                 new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<ProfessorDTO> updateProfessor(@RequestBody ProfessorDTO professorDTO, @PathVariable Integer id) {
+        ProfessorDTO foundProfessor = professorService.findById(id);
+        if (professorDTO.getFaculty()!=null) {
+            foundProfessor.setFaculty(professorDTO.getFaculty());
+        }
+        if (professorDTO.getJoinDate()!=null) {
+            foundProfessor.setJoinDate(professorDTO.getJoinDate());
+        }
+        if (professorDTO.getUserappId()!=null) {
+            foundProfessor.setUserappId(professorDTO.getUserappId());
+        }
+        ProfessorDTO newProfessor = professorService.save(foundProfessor);
+        return new ResponseEntity<>(newProfessor, HttpStatus.OK);
+    }
+
     @PostMapping
     public ResponseEntity<ProfessorDTO> createProfessor(@RequestBody ProfessorDTO professorDTO) {
         return new ResponseEntity<>(professorService.save(professorDTO), HttpStatus.CREATED);

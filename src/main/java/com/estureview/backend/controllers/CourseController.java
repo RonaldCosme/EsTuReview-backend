@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.persistence.PostUpdate;
 import java.util.List;
 
 @RestController
@@ -27,6 +28,25 @@ public class CourseController {
         return courseDTO != null ?
                 new ResponseEntity<>(courseDTO, HttpStatus.OK) :
                 new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<CourseDTO> updateCourse(@RequestBody CourseDTO courseDTO, @PathVariable Integer id) {
+        CourseDTO foundCourse = courseService.findById(id);
+        if (courseDTO.getCourseName()!=null) {
+            foundCourse.setCourseName(courseDTO.getCourseName());
+        }
+        if (courseDTO.getCourseCode()!=null) {
+            foundCourse.setCourseCode(courseDTO.getCourseCode());
+        }
+        if (courseDTO.getDescription()!=null) {
+            foundCourse.setDescription(courseDTO.getDescription());
+        }
+        if (courseDTO.getUniversityId()!=null) {
+            foundCourse.setUniversityId(courseDTO.getUniversityId());
+        }
+        CourseDTO newCourse = courseService.save(foundCourse);
+        return new ResponseEntity<>(newCourse, HttpStatus.OK);
     }
 
     @PostMapping

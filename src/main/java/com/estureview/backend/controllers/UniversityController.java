@@ -29,6 +29,26 @@ public class UniversityController {
                 new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<UniversityDTO> updateUniversity(@RequestBody UniversityDTO universityDTO, @PathVariable Integer id) {
+        UniversityDTO foundUniversity = universityService.findById(id);
+        if (universityDTO.getName()!=null) {
+            foundUniversity.setName(universityDTO.getName());
+        }
+        if (universityDTO.getCampus()!=null) {
+            foundUniversity.setCampus(universityDTO.getCampus());
+        }
+        if (universityDTO.getLocation()!=null) {
+            foundUniversity.setLocation(universityDTO.getLocation());
+        }
+        if (universityDTO.getDescription()!=null) {
+            foundUniversity.setDescription(universityDTO.getDescription());
+        }
+        UniversityDTO newUniversity = universityService.save(foundUniversity);
+        return new ResponseEntity<>(newUniversity, HttpStatus.OK);
+    }
+
+
     @PostMapping
     public ResponseEntity<UniversityDTO> createUniversity(@RequestBody UniversityDTO universityDTO) {
         return new ResponseEntity<>(universityService.save(universityDTO), HttpStatus.CREATED);

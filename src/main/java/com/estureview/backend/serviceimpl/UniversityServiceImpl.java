@@ -42,6 +42,13 @@ public class UniversityServiceImpl implements UniversityService {
     }
 
     @Override
+    public UniversityDTO update(UniversityDTO universityDTO) {
+        University university = modelMapper.map(universityDTO, University.class);
+        university = universityRepository.save(university);
+        return modelMapper.map(university, UniversityDTO.class);
+    }
+
+    @Override
     public void deleteById(Integer id) {
         universityRepository.deleteById(id);
     }
