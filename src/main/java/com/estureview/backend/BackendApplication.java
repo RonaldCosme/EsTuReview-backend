@@ -148,6 +148,8 @@ public class BackendApplication {
 			courseRepository.save(course);
 
 			//*** PROFESSOR *** /
+			Professor professor = new Professor(Long.valueOf(0), "Ciencias", new Date(), new HashSet<>());
+			professorRepository.save(professor);
 
 			//*** REVIEW *** //
 
