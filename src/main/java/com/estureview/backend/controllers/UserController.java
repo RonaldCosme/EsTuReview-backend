@@ -15,6 +15,8 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/api")
@@ -52,9 +54,10 @@ public class UserController {
         return new ResponseEntity<User>(user, HttpStatus.OK);
     }
 
-
-
-
+    @GetMapping("/users")
+    public ResponseEntity<List<User>> getUsers() {
+        return new ResponseEntity<List<User>>(userService.list(), HttpStatus.OK);
+    }
 
     @PostMapping("/users/login")
     public ResponseEntity<DTOToken> authenticate(@RequestBody DTOUser user) {

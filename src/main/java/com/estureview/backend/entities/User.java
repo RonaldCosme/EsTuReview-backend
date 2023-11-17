@@ -16,7 +16,6 @@ import java.util.List;
 @AllArgsConstructor
 public class User{
 
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -24,11 +23,11 @@ public class User{
     private String userName;
     private String password;
 
-    //private String firstName;
+    private String firstName;
 
-    //private String lastName;
+    private String lastName;
 
-    //private Date birthdate;
+    private Date birthdate;
     private boolean enabled;
     private Date passwordLastUpdate;
 
@@ -56,12 +55,14 @@ public class User{
     private List<Authority> authorities;
 
 
-    public User(String userName, String password, boolean enabled, Date passwordLastUpdate, List<Authority> authorities) {
+    public User(String userName, String password, boolean enabled, Date passwordLastUpdate, List<Authority> authorities, String firstName, String lastName, Date birthdate) {
         this.userName = userName;
         this.password = password;
         this.enabled = enabled;
         this.passwordLastUpdate = passwordLastUpdate;
         this.authorities = authorities;
+        this.firstName=firstName;
+        this.lastName=lastName;
+        this.birthdate=birthdate;
     }
-
 }

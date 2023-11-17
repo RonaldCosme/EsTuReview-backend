@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
@@ -47,11 +48,11 @@ public class BackendApplication {
 
 
 			userRepository.save(
-					new User("admin", new BCryptPasswordEncoder().encode("admin!"),true,new Date(),
+					new User("gmorip", new BCryptPasswordEncoder().encode("UPC2023!"),true,new Date(),
 							List.of(
 									authorityRepository.findByName(AuthorityName.ROLE_ADMIN),
 									authorityRepository.findByName(AuthorityName.WRITE)
-							)
+							),"Geronima", "Ripeta",         Date.from(LocalDate.of(2002, 5, 9).atStartOfDay(ZoneId.systemDefault()).toInstant())
 					)
 			);
 
@@ -60,7 +61,7 @@ public class BackendApplication {
 							List.of(
 									authorityRepository.findByName(AuthorityName.ROLE_ALUMNO),
 									authorityRepository.findByName(AuthorityName.READ)
-							)
+							), "Crecia", "Lopez",  Date.from(LocalDate.of(2003, 11, 10).atStartOfDay(ZoneId.systemDefault()).toInstant())
 					)
 			);
 			University universitySaved = universityRepository.save(new University(Long.valueOf(0), "UPC", "SAN MIGUEL", "LA MARINA", "Una buena universidad", new HashSet<>()));
@@ -148,8 +149,6 @@ public class BackendApplication {
 			courseRepository.save(course);
 
 			//*** PROFESSOR *** /
-			Professor professor = new Professor(Long.valueOf(0), "Ciencias", new Date(), new HashSet<>());
-			professorRepository.save(professor);
 
 			//*** REVIEW *** //
 

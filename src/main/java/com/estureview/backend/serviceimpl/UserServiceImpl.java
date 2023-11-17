@@ -10,6 +10,7 @@ import com.estureview.backend.exceptions.ResourceNotFoundException;
 import com.estureview.backend.repositories.AuthorityRepository;
 import com.estureview.backend.repositories.UserRepository;
 import com.estureview.backend.services.UserService;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -19,7 +20,8 @@ import java.util.List;
 
 @Service
 public class UserServiceImpl implements UserService {
-
+    @Autowired
+    private ModelMapper modelMapper;
     @Autowired
     UserRepository userRepository;
     @Autowired
@@ -34,6 +36,7 @@ public class UserServiceImpl implements UserService {
         return userFound;
     }
 
+
     @Override
     public User register(DTOUser user) {
 
@@ -46,6 +49,11 @@ public class UserServiceImpl implements UserService {
 
             User newUser = new User();
             newUser.setUserName(user.getUserName());
+
+            newUser.setFirstName(user.getFirstName());
+            newUser.setLastName(user.getLastName());
+            newUser.setBirthdate(user.getBirthdate());
+
             newUser.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
             newUser.setEnabled(true);
             newUser.setPasswordLastUpdate(new Date());
@@ -81,6 +89,12 @@ public class UserServiceImpl implements UserService {
             throw new IncompleteDataException("User name and password length can not be less than 4 characters");
         }
     }
+
+    @Override
+    public List<User> list() {
+        return userRepository.findAll();
+    }
+
 }
 
 //un usuario no puede tener la contraseña o nombre de usuario menor que 4 digitos
