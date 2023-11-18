@@ -48,7 +48,7 @@ public class BackendApplication {
 
 
 			userRepository.save(
-					new User("gmorip", new BCryptPasswordEncoder().encode("UPC2023!"),true,new Date(),
+					new User("admin", new BCryptPasswordEncoder().encode("admin!"),true,new Date(),
 							List.of(
 									authorityRepository.findByName(AuthorityName.ROLE_ADMIN),
 									authorityRepository.findByName(AuthorityName.WRITE)
@@ -64,6 +64,20 @@ public class BackendApplication {
 							), "Crecia", "Lopez",  Date.from(LocalDate.of(2003, 11, 10).atStartOfDay(ZoneId.systemDefault()).toInstant())
 					)
 			);
+
+			User userSaved = userRepository.save(
+					new User("jose", new BCryptPasswordEncoder().encode("jose21"),true,new Date(),
+							List.of(
+									authorityRepository.findByName(AuthorityName.ROLE_PROFESSOR),
+									authorityRepository.findByName(AuthorityName.READ)
+							), "Jose", "Lopez",  Date.from(LocalDate.of(2000, 11, 12).atStartOfDay(ZoneId.systemDefault()).toInstant())
+					)
+			);
+
+
+
+
+
 			University universitySaved = universityRepository.save(new University(Long.valueOf(0), "UPC", "SAN MIGUEL", "LA MARINA", "Una buena universidad", new HashSet<>()));
 			universityRepository.save(new University(Long.valueOf(0), "UCV", "LIMA NORTE", "LOS OLIVOS", "No entender", new HashSet<>()));
 			universityRepository.save(new University(Long.valueOf(0), "PUCP", "Lima", "San Miguel", "Una universidad reconocida", new HashSet<>()));
@@ -71,6 +85,29 @@ public class BackendApplication {
 			universityRepository.save(new University(Long.valueOf(0), "USMP", "Lima", "Santa Anita", "Educar para liderar", new HashSet<>()));
 			universityRepository.save(new University(Long.valueOf(0), "UDEP", "Piura", "Piura", "Universidad de Piura", new HashSet<>()));
 			universityRepository.save(new University(Long.valueOf(0), "UNI", "Lima", "Rímac", "Ciencia, Tecnología y Humanismo", new HashSet<>()));
+
+			//*** COURSE *** /
+
+			Course courseSaved = courseRepository.save(new Course(Long.valueOf(0), "Mate básica", "10021", "Lo más básico de mate", universitySaved, new HashSet<>()));
+			courseRepository.save(new Course(Long.valueOf(0), "Mate avanzada", "10022", "Lo más avanzado de mate", universitySaved, new HashSet<>()));
+			courseRepository.save(new Course(Long.valueOf(0), "Mate intermedia", "10023", "Lo más intermedio de mate", universitySaved, new HashSet<>()));
+			courseRepository.save(new Course(Long.valueOf(0), "fisica", "10021", "este curso trata de fisica", universitySaved, new HashSet<>()));
+			courseRepository.save(new Course(Long.valueOf(0), "quimica", "10028", "este curso trata de quimica", universitySaved, new HashSet<>()));
+			courseRepository.save(new Course(Long.valueOf(0), "biologia", "10024", "este curso trata de biologia", universitySaved, new HashSet<>()));
+			courseRepository.save(new Course(Long.valueOf(0), "historia", "10025", "este curso trata de historia", universitySaved, new HashSet<>()));
+			courseRepository.save(new Course(Long.valueOf(0), "geografia", "10026", "este curso trata de geografia", universitySaved, new HashSet<>()));
+
+			//*** PROFESSOR *** /
+
+			Professor professorSaved = professorRepository.save(new Professor(Long.valueOf(0), userSaved, "Ingenieria", new Date(), new HashSet<>()));
+			professorRepository.save(new Professor(Long.valueOf(0), userSaved, "Ciencias", new Date(), new HashSet<>()));
+			professorRepository.save(new Professor(Long.valueOf(0), userSaved, "Artes", new Date(), new HashSet<>()));
+			professorRepository.save(new Professor(Long.valueOf(0), userSaved, "Derecho", new Date(), new HashSet<>()));
+			professorRepository.save(new Professor(Long.valueOf(0), userSaved, "Medicina", new Date(), new HashSet<>()));
+
+
+
+
 
 
 			//universityRepository.delete(universitySaved);
@@ -144,13 +181,19 @@ public class BackendApplication {
 			System.out.println("\n"+employeePromoted);*/
 
 
-			//*** COURSE *** /
-			Course course = new Course(Long.valueOf(0), "Mate básica", "10021", "Lo más básico de mate", universitySaved, new HashSet<>());
-			courseRepository.save(course);
+
 
 			//*** PROFESSOR *** /
 
+
+
 			//*** REVIEW *** //
+
+
+
+
+
+
 
 
 

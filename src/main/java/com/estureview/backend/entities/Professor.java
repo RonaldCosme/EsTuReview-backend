@@ -20,11 +20,16 @@ public class Professor {
     @Column(name = "professor_id")
     private Long professorId;
 
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
     @Column(name = "faculty")
     private String faculty;
 
     @Column(name = "join_date")
     private Date joinDate;
+
 
     @OneToMany(mappedBy = "professor")
     private Set<Review> reviews;

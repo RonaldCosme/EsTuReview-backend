@@ -12,6 +12,7 @@ import java.util.Date;
 public class ProfessorDTO {
 
     private Long professorId;
+    private Long userId;
     private String faculty;
     private Date joinDate;
 
