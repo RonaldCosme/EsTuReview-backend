@@ -12,9 +12,3 @@ COPY target /app/target
 # Construye la aplicación, omitiendo las pruebas unitarias
 RUN mvn clean package -DskipTests
 
-# Expone el puerto en el que se ejecutará la aplicación
-EXPOSE 8080
-
-# Configura el comando para ejecutar la aplicación
-# Asegúrate de reemplazar 'tu-app.jar' con el nombre del JAR generado por Maven
-CMD ["java", "-jar", "target/tu-app.jar"]
