@@ -16,5 +16,8 @@ public class ProfessorDTO {
     private String faculty;
     private Date joinDate;
 
+    private String userFirstname;
+    private String userLastname;
+
     // Getters and Setters
 }

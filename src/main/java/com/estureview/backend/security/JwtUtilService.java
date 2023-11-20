@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 public class JwtUtilService {
     // WEB_DEV_UPC_202301 => [Base64] => V0VCX0RFVl9VUENfMjAyMzAx
     private static final String JWT_SIGNATURE_KEY = "V0VCX0RFVl9VUENfMjAyMzAx";
-    private static Long JWT_TOKEN_VALIDITY = 1000 * 60 * 60 * (long)3; // 3 horas de validez del token
+    private static Long JWT_TOKEN_VALIDITY = 1000 * 60 * 60 * (long)30; // 3 horas de validez del token
 
 
     private Claims extractAllClaims(String token) {

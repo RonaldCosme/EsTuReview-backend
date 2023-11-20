@@ -88,8 +88,8 @@ public class BackendApplication {
 
 			//*** COURSE *** /
 
-			Course courseSaved = courseRepository.save(new Course(Long.valueOf(0), "Mate básica", "10021", "Lo más básico de mate", universitySaved, new HashSet<>()));
-			courseRepository.save(new Course(Long.valueOf(0), "Mate avanzada", "10022", "Lo más avanzado de mate", universitySaved, new HashSet<>()));
+			Course courseSaved1 = courseRepository.save(new Course(Long.valueOf(0), "Mate básica", "10021", "Lo más básico de mate", universitySaved, new HashSet<>()));
+			Course courseSaved2 =courseRepository.save(new Course(Long.valueOf(0), "Mate avanzada", "10022", "Lo más avanzado de mate", universitySaved, new HashSet<>()));
 			courseRepository.save(new Course(Long.valueOf(0), "Mate intermedia", "10023", "Lo más intermedio de mate", universitySaved, new HashSet<>()));
 			courseRepository.save(new Course(Long.valueOf(0), "fisica", "10021", "este curso trata de fisica", universitySaved, new HashSet<>()));
 			courseRepository.save(new Course(Long.valueOf(0), "quimica", "10028", "este curso trata de quimica", universitySaved, new HashSet<>()));
@@ -99,11 +99,12 @@ public class BackendApplication {
 
 			//*** PROFESSOR *** /
 
-			Professor professorSaved = professorRepository.save(new Professor(Long.valueOf(0), userSaved, "Ingenieria", new Date(), new HashSet<>()));
-			professorRepository.save(new Professor(Long.valueOf(0), userSaved, "Ciencias", new Date(), new HashSet<>()));
-			professorRepository.save(new Professor(Long.valueOf(0), userSaved, "Artes", new Date(), new HashSet<>()));
-			professorRepository.save(new Professor(Long.valueOf(0), userSaved, "Derecho", new Date(), new HashSet<>()));
-			professorRepository.save(new Professor(Long.valueOf(0), userSaved, "Medicina", new Date(), new HashSet<>()));
+			Professor professorSaved1 = professorRepository.save(new Professor(Long.valueOf(0), userSaved, "Ingenieria", new Date(), new HashSet<>(),null,null));
+			Professor professorSaved2 = professorRepository.save(new Professor(Long.valueOf(0), userSaved, "Ciencias", new Date(), new HashSet<>(),null,null));
+			professorRepository.save(new Professor(Long.valueOf(0), userSaved, "Artes", new Date(), new HashSet<>(),null,null));
+			professorRepository.save(new Professor(Long.valueOf(0), userSaved, "Derecho", new Date(), new HashSet<>(),null,null));
+			professorRepository.save(new Professor(Long.valueOf(0), userSaved, "Medicina", new Date(), new HashSet<>(),null,null));
+
 
 
 
@@ -190,7 +191,39 @@ public class BackendApplication {
 			//*** REVIEW *** //
 
 
+			Review review1 = new Review();
+			review1.setProfessor(professorSaved1);
+			review1.setCourse(courseSaved1);
+			review1.setComment("Comment 1");
+			review1.setRating(5);
+			review1.setReviewDate(new Date());
+			review1.setStatus("published");
+			reviewRepository.save(review1);
 
+			Review review2 = new Review();
+			review2.setProfessor(professorSaved2);
+			review2.setCourse(courseSaved2);
+			review2.setComment("Comment 2");
+			review2.setRating(0);
+			review2.setReviewDate(new Date());
+			review2.setStatus("published");
+			reviewRepository.save(review2);
+
+
+			//Review coment
+			ReviewComment reviewComment1 = new ReviewComment();
+			reviewComment1.setText("review coment 1");
+			reviewComment1.setTag("tag1");
+			reviewComment1.setCommentDate(new Date());
+			reviewComment1.setReview(review1);
+			reviewCommentRepository.save(reviewComment1);
+
+			ReviewComment reviewComment2 = new ReviewComment();
+			reviewComment2.setText("review coment 2");
+			reviewComment2.setTag("tag2");
+			reviewComment2.setCommentDate(new Date());
+			reviewComment2.setReview(review2);
+			reviewCommentRepository.save(reviewComment2);
 
 
 

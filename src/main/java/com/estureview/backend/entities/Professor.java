@@ -34,5 +34,19 @@ public class Professor {
     @OneToMany(mappedBy = "professor")
     private Set<Review> reviews;
 
+    @Transient
+    private String userFirstname;
+    @Transient
+    private String userLastname;
+
+
+    public String getUserFirstname (){
+        return this.getUser().getFirstName();
+    }
+
+    public String getUserLastname (){
+        return this.getUser().getLastName();
+    }
+
     // Getters and Setters
 }
