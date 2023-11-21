@@ -9,7 +9,8 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.PostUpdate;
 import java.util.List;
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = {"http://www.estureview.online", "https://www.estureview.online"})
+
 
 @RestController
 @RequestMapping("/api/courses")
