@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.PostUpdate;
 import java.util.List;
-@CrossOrigin(origins = {"http://www.estureview.online", "https://www.estureview.online"})
+@CrossOrigin(origins = {"http://www.estureview.online"})
 
 
 @RestController

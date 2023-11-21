@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@CrossOrigin(origins = {"http://www.estureview.online", "https://www.estureview.online"})
+@CrossOrigin(origins = {"http://www.estureview.online"})
 
 @RestController
 @RequestMapping("/api")
