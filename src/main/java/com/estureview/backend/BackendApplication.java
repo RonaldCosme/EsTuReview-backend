@@ -139,6 +139,8 @@ public class BackendApplication {
 			professorRepository.save(new Professor(Long.valueOf(0), userSaved3, "Artes", new Date(), new HashSet<>(),null,null));
 			professorRepository.save(new Professor(Long.valueOf(0), userSaved4, "Derecho", new Date(), new HashSet<>(),null,null));
 			professorRepository.save(new Professor(Long.valueOf(0), userSaved5, "Medicina", new Date(), new HashSet<>(),null,null));
+			professorRepository.save(new Professor(Long.valueOf(0), userSaved5, "Matematicas", new Date(), new HashSet<>(),null,null));
+
 
 
 
@@ -229,8 +231,8 @@ public class BackendApplication {
 			Review review1 = new Review();
 			review1.setProfessor(professorSaved1);
 			review1.setCourse(courseSaved1);
-			review1.setComment("Comment 1");
-			review1.setRating(5);
+			review1.setComment("El profesor me enseña de manera clara y concisa");
+			review1.setRating(8);
 			review1.setReviewDate(new Date());
 			review1.setStatus("published");
 			reviewRepository.save(review1);
@@ -238,27 +240,64 @@ public class BackendApplication {
 			Review review2 = new Review();
 			review2.setProfessor(professorSaved2);
 			review2.setCourse(courseSaved2);
-			review2.setComment("Comment 2");
-			review2.setRating(0);
+			review2.setComment("El profeosr es muy amable");
+			review2.setRating(7);
 			review2.setReviewDate(new Date());
 			review2.setStatus("published");
 			reviewRepository.save(review2);
 
+			Review review3 = new Review();
+			review3.setProfessor(professorSaved1);
+			review3.setCourse(courseSaved1);
+			review3.setComment("El profesor me enseña de manera clara y concisa");
+			review3.setRating(8);
+			review3.setReviewDate(new Date());
+			review3.setStatus("published");
+			reviewRepository.save(review3);
+
+			Review review4 = new Review();
+			review4.setProfessor(professorSaved2);
+			review4.setCourse(courseSaved2);
+			review4.setComment("El profeosr es muy amable");
+			review4.setRating(7);
+			review4.setReviewDate(new Date());
+			review4.setStatus("published");
+			reviewRepository.save(review4);
+
+
+
+
+
+
 
 			//Review coment
 			ReviewComment reviewComment1 = new ReviewComment();
-			reviewComment1.setText("review coment 1");
-			reviewComment1.setTag("tag1");
+			reviewComment1.setText("Gracias por tu comentario");
+			reviewComment1.setTag("Atento");
 			reviewComment1.setCommentDate(new Date());
 			reviewComment1.setReview(review1);
 			reviewCommentRepository.save(reviewComment1);
 
 			ReviewComment reviewComment2 = new ReviewComment();
-			reviewComment2.setText("review coment 2");
-			reviewComment2.setTag("tag2");
+			reviewComment2.setText("Saludos desde el campus universitario");
+			reviewComment2.setTag("Amigable");
 			reviewComment2.setCommentDate(new Date());
 			reviewComment2.setReview(review2);
 			reviewCommentRepository.save(reviewComment2);
+
+			ReviewComment reviewComment3 = new ReviewComment();
+			reviewComment3.setText("Quedo atención a tus comentarios");
+			reviewComment3.setTag("Disponible");
+			reviewComment3.setCommentDate(new Date());
+			reviewComment3.setReview(review3);
+			reviewCommentRepository.save(reviewComment3);
+
+			ReviewComment reviewComment4 = new ReviewComment();
+			reviewComment4.setText("Estoy de acuerdo contigo");
+			reviewComment4.setTag("Amigable");
+			reviewComment4.setCommentDate(new Date());
+			reviewComment4.setReview(review4);
+			reviewCommentRepository.save(reviewComment4);
 
 
 
