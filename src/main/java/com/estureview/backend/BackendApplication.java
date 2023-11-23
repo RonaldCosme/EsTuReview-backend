@@ -65,6 +65,8 @@ public class BackendApplication {
 					)
 			);
 
+			//user profesor
+
 			User userSaved = userRepository.save(
 					new User("jose", new BCryptPasswordEncoder().encode("jose21"),true,new Date(),
 							List.of(
@@ -74,8 +76,41 @@ public class BackendApplication {
 					)
 			);
 
+			User userSaved2 = userRepository.save(
+					new User("Feliciano", new BCryptPasswordEncoder().encode("feliciano13"),true,new Date(),
+							List.of(
+									authorityRepository.findByName(AuthorityName.ROLE_PROFESSOR),
+									authorityRepository.findByName(AuthorityName.READ)
+							), "Feliciano", "Carbajal",  Date.from(LocalDate.of(1998, 11, 13).atStartOfDay(ZoneId.systemDefault()).toInstant())
+					)
+			);
 
+			User userSaved3 = userRepository.save(
+					new User("Luis", new BCryptPasswordEncoder().encode("luis12"),true,new Date(),
+							List.of(
+									authorityRepository.findByName(AuthorityName.ROLE_PROFESSOR),
+									authorityRepository.findByName(AuthorityName.READ)
+							), "Luis", "Lopez",  Date.from(LocalDate.of(1999, 11, 14).atStartOfDay(ZoneId.systemDefault()).toInstant())
+					)
+			);
 
+			User userSaved4 = userRepository.save(
+					new User("Maria", new BCryptPasswordEncoder().encode("maria11"),true,new Date(),
+							List.of(
+									authorityRepository.findByName(AuthorityName.ROLE_PROFESSOR),
+									authorityRepository.findByName(AuthorityName.READ)
+							), "Maria", "Lopez",  Date.from(LocalDate.of(1997, 11, 15).atStartOfDay(ZoneId.systemDefault()).toInstant())
+					)
+			);
+
+			User userSaved5 = userRepository.save(
+					new User("Juan", new BCryptPasswordEncoder().encode("juan10"),true,new Date(),
+							List.of(
+									authorityRepository.findByName(AuthorityName.ROLE_PROFESSOR),
+									authorityRepository.findByName(AuthorityName.READ)
+							), "Juan", "Lopez",  Date.from(LocalDate.of(1996, 11, 16).atStartOfDay(ZoneId.systemDefault()).toInstant())
+					)
+			);
 
 
 			University universitySaved = universityRepository.save(new University(Long.valueOf(0), "UPC", "SAN MIGUEL", "LA MARINA", "Una buena universidad", new HashSet<>()));
@@ -100,10 +135,10 @@ public class BackendApplication {
 			//*** PROFESSOR *** /
 
 			Professor professorSaved1 = professorRepository.save(new Professor(Long.valueOf(0), userSaved, "Ingenieria", new Date(), new HashSet<>(),null,null));
-			Professor professorSaved2 = professorRepository.save(new Professor(Long.valueOf(0), userSaved, "Ciencias", new Date(), new HashSet<>(),null,null));
-			professorRepository.save(new Professor(Long.valueOf(0), userSaved, "Artes", new Date(), new HashSet<>(),null,null));
-			professorRepository.save(new Professor(Long.valueOf(0), userSaved, "Derecho", new Date(), new HashSet<>(),null,null));
-			professorRepository.save(new Professor(Long.valueOf(0), userSaved, "Medicina", new Date(), new HashSet<>(),null,null));
+			Professor professorSaved2 = professorRepository.save(new Professor(Long.valueOf(0), userSaved2, "Ciencias", new Date(), new HashSet<>(),null,null));
+			professorRepository.save(new Professor(Long.valueOf(0), userSaved3, "Artes", new Date(), new HashSet<>(),null,null));
+			professorRepository.save(new Professor(Long.valueOf(0), userSaved4, "Derecho", new Date(), new HashSet<>(),null,null));
+			professorRepository.save(new Professor(Long.valueOf(0), userSaved5, "Medicina", new Date(), new HashSet<>(),null,null));
 
 
 
